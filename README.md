@@ -4,3 +4,6 @@ This repository contains the (work in progress) material for the next Meetups of
 
 * [This link](https://github.com/rladies/meetup-presentations_freiburg)  has the materia that was already used in the R-Ladies Freiburg meetups. 
 
+
+![](https://github.com/ichisa/R-Ladies-Freiburg-Back-Stage/blob/master/Pictures%20and%20Plots/R-Ladies-LOGO.jpg)
+
