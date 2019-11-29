@@ -1,0 +1,51 @@
+Modelling part 3 -
+========================================================
+autosize: true
+
+
+# Machine Learning
+
+## R-Ladies Freiburg
+
+Elisa Schneider
+
+Tree Based Methods
+========================================================
+
+<small> We use the **Hitters** data set to predict a baseball player's **Salary** based on
+
+**Years**: the number of years that he has played in the major leagues and
+
+**Hits**: the number of hits that he made in the previous year. </small>
+
+```{r, echo=FALSE, out.width="40%"}
+library(ISLR)
+library(ggplot2)
+Hitters <- Hitters[!is.na(Hitters$Salary),]
+ggplot(Hitters, aes(x=Years, y=Hits, color=Salary)) +
+  geom_point(size=3) +
+  geom_vline(xintercept=4.5, linetype="dashed", 
+                color = "orange", size=2) +
+  geom_segment(aes(x = 4.5, y = 117.5, xend = 25, yend = 117.5),linetype="dashed", 
+                color = "orange", size=2) +
+  theme(text = element_text(size=28))
+
+  #geom_hline(yintercept=117.5, )
+  
+#Heart <- read_csv("Heart.csv")
+```
+
+
+Slide With Code
+========================================================
+
+```{r}
+summary(cars)
+```
+
+Slide With Plot
+========================================================
+
+```{r, echo=FALSE}
+plot(cars)
+```
