@@ -168,12 +168,50 @@ plot(RFmodel)
 varImpPlot(RFmodel)
 ```
 
-Neural Network
+Artifitial Neural Network
 ========================================================
 autosize: true
 
-
+- ANN is an information processing model inspired by the biological neuron system. 
+- It is composed of a large number of interconnected processing elements: the neuron. 
+- ANN were designed to solve problems which are easy for humans and difficult for machines such as identifying patterns: distingushing pictures of cats and dogs or recognizing numbers in pictures
 
 ****
 
 ![alt text](modeling3-figure/Capture5.png)
+
+ANN structure
+========================================================
+
+
+![alt text](modeling3-figure/Capture7.png)
+
+
+Example
+========================================================
+class: small-code
+
+```{r}
+index <- sample(1:nrow(housing),round(0.75*nrow(housing)))
+train <- housing[index,]
+test <- housing[-index,] 
+```
+
+```{r}
+maxs <- apply(housing, 2, max) 
+mins <- apply(housing, 2, min)
+scaled <- as.data.frame(scale(housing, center = mins, scale = maxs - mins))
+train_ <- scaled[index,]
+test_ <- scaled[-index,]
+```
+
+
+```{r}
+library(neuralnet)
+n <- names(train_)
+f <- as.formula(paste("medv ~", paste(n[!n %in% "medv"], collapse = " + ")))
+nn <- neuralnet(f, data=train_,hidden=c(5,3), linear.output=T)
+plot (nn)
+```
+
+
