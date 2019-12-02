@@ -11,6 +11,10 @@ autosize: true
 
 Elisa Schneider
 
+Random Forests
+========================================================
+
+
 Tree Based Methods
 ========================================================
 
@@ -120,11 +124,10 @@ class: small-code
 ```r
 library(readr)
 library(randomForest)
+library(MASS)
+housing <- Boston
 
-housing <- read_table2("housing.csv", col_names = FALSE)
-colnames(housing) <- c("CRIM", "ZN", "INDUS", "CHAS",  "NOX", "RM",  "AGE",  "DIS", "RAD", "TAX", "PTRATIO" , "B", "LSTAT",  "MEDV")
-
-RFmodel <- randomForest(MEDV~., ntree=500, mtry=6, data=housing)
+RFmodel <- randomForest(medv~., ntree=500, mtry=6, data=housing)
 
 RFmodel
 ```
@@ -132,13 +135,13 @@ RFmodel
 ```
 
 Call:
- randomForest(formula = MEDV ~ ., data = housing, ntree = 500,      mtry = 6) 
+ randomForest(formula = medv ~ ., data = housing, ntree = 500,      mtry = 6) 
                Type of random forest: regression
                      Number of trees: 500
 No. of variables tried at each split: 6
 
-          Mean of squared residuals: 9.353139
-                    % Var explained: 88.92
+          Mean of squared residuals: 9.792497
+                    % Var explained: 88.4
 ```
 
 Example
@@ -161,3 +164,12 @@ varImpPlot(RFmodel)
 
 ![plot of chunk unnamed-chunk-5](modeling3-figure/unnamed-chunk-5-1.png)
 
+Neural Network
+========================================================
+autosize: true
+
+
+
+****
+
+![alt text](modeling3-figure/Capture5.png)

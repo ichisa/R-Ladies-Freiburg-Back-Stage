@@ -11,6 +11,10 @@ autosize: true
 
 Elisa Schneider
 
+Random Forests
+========================================================
+
+
 Tree Based Methods
 ========================================================
 
@@ -142,11 +146,10 @@ class: small-code
 
 library(readr)
 library(randomForest)
+library(MASS)
+housing <- Boston
 
-housing <- read_table2("housing.csv", col_names = FALSE)
-colnames(housing) <- c("CRIM", "ZN", "INDUS", "CHAS",  "NOX", "RM",  "AGE",  "DIS", "RAD", "TAX", "PTRATIO" , "B", "LSTAT",  "MEDV")
-
-RFmodel <- randomForest(MEDV~., ntree=500, mtry=6, data=housing)
+RFmodel <- randomForest(medv~., ntree=500, mtry=6, data=housing)
 
 RFmodel
 ```
@@ -165,3 +168,12 @@ plot(RFmodel)
 varImpPlot(RFmodel)
 ```
 
+Neural Network
+========================================================
+autosize: true
+
+
+
+****
+
+![alt text](modeling3-figure/Capture5.png)
