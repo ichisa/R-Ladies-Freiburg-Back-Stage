@@ -140,8 +140,8 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 6
 
-          Mean of squared residuals: 9.350241
-                    % Var explained: 88.92
+          Mean of squared residuals: 9.948812
+                    % Var explained: 88.22
 ```
 
 Example
@@ -214,3 +214,40 @@ plot (nn)
 ```
 
 
+Measuring performance
+========================================================
+class: small-code
+
+To test the model we can not use the same data used to fit the model. There are different strategies to test the model when we have only one data-set (this could be another hole MeetUp). One is what we did before, split the data set in two. An then calculate differen meassures to test the model:
+
+- Regression
+
+$$	RMSE =  \sqrt\frac{\strut{\sum\limits_{i=1}^{n}{(\hat{y}_{i}-y_{i})^2}}}{n} $$
+
+Measuring performance
+========================================================
+class: small-code
+
+Classification (0,1)
+
+
+```r
+library(verification)
+verification::roc.area(obs, pred)
+```
+
+Cassification (More than two categories)
+
+
+```r
+table(obs, pred)
+
+ggplot(longData, aes(x = Var2, y = Var1)) + 
+  geom_raster(aes(fill=value))
+
+library(caret)
+caret::confusion.matrix(obs, pred)
+```
+
+
+[More Info Here](https://www.datascienceblog.net/post/machine-learning/performance-measures-multi-class-problems/)
