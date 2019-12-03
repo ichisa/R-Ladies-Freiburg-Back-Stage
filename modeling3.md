@@ -140,8 +140,8 @@ Call:
                      Number of trees: 500
 No. of variables tried at each split: 6
 
-          Mean of squared residuals: 9.948812
-                    % Var explained: 88.22
+          Mean of squared residuals: 9.72311
+                    % Var explained: 88.48
 ```
 
 Example
@@ -204,6 +204,10 @@ test_ <- scaled[-index,]
 ```
 
 
+Example
+========================================================
+class: small-code
+
 
 ```r
 library(neuralnet)
@@ -212,6 +216,8 @@ f <- as.formula(paste("medv ~", paste(n[!n %in% "medv"], collapse = " + ")))
 nn <- neuralnet(f, data=train_,hidden=c(5,3), linear.output=T)
 plot (nn)
 ```
+
+![alt text](modeling3-figure/Capture9.png)
 
 
 Measuring performance

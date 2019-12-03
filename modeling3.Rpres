@@ -206,6 +206,10 @@ test_ <- scaled[-index,]
 ```
 
 
+Example
+========================================================
+class: small-code
+
 ```{r}
 library(neuralnet)
 n <- names(train_)
@@ -213,6 +217,8 @@ f <- as.formula(paste("medv ~", paste(n[!n %in% "medv"], collapse = " + ")))
 nn <- neuralnet(f, data=train_,hidden=c(5,3), linear.output=T)
 plot (nn)
 ```
+
+![alt text](modeling3-figure/Capture9.png)
 
 
 Measuring performance
