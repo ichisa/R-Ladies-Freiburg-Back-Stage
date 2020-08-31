@@ -36,10 +36,11 @@ Now read this sentence:
 *The old man the boat.*
 
 What happened when you read this sentence, and why?  
+
 Which word(s) did you get stuck on?
 
 Typically, people interpret *old* as an adjective which refers to *man* as a noun. But here, *old* is a noun and *man* a verb instead, so in **garden-path sentences** like these, readers need to update their interpretations.  
-In this example, we'd typically see a delay on *the* because that's when readers realise their interpretation can't be correct.
+In this example, we'd typically see a delay on *the* because that's when readers realise their initial interpretation can't be correct.
 
 
 How do eye-trackers work?
@@ -147,18 +148,17 @@ Where can you use eye-tracking?
 - Consumer behaviour
 - Expertise and training
 
+...and for many different kinds of participants
 
-Typical eye-tracking procedure
+
+Considerations 
 ========================================================
-**... in a reading experiment**
 
-Calibration and validation [(video)](https://youtu.be/FPkRxzSE0bk?t=52)
-
-Once successful, a loop of:
-- text
-- question
-- feedback
-- drift correct  
+- Calibration and validation [(video)](https://youtu.be/FPkRxzSE0bk?t=52)
+- 'Trial'
+- Checks:
+  - question & feedback
+  - drift correct/fixation between trials  
 
 ...while managing a long list of potential problems (contact lenses, glasses, mascara or long lashes, small eyes, wet eyes, downward-facing lashes, sunlight, electromagnetic noise in the lab...)
 
@@ -190,14 +190,12 @@ What kind of data can you get from eye-trackers?
 type: prompt
 incremental: true
 
-- Fixations: eyes stop, don't move (number of fixations and fixation *duration* commonly analysed)
-- Saccades: movements from fixation to fixation
+- Fixations
+- Saccades
 - Microsaccades
-- Regressions: backwards movements  
-  - short regressions likely due to overshooting
-  - long(er) regressions: processing difficulty
-- Pupil dilation: can indicate mental load
-- Blinks
+- Regressions
+- Pupil dilation
+- Blinks  
 
 What parameters could we get from these? How could they compliment each other?
 
@@ -217,13 +215,13 @@ What does eye-tracking data look like?
 ========================================================
 **An example of a reading experiment investigating gender stereotypes**
 
-Congruent condition:
-The *doctor* enjoyed *his* day off.
-The *nurse* liked *her* new shoes.
+Congruent condition:  
+The *doctor* enjoyed *his* day off.  
+The *nurse* liked *her* new shoes.  
 
-Incongruent condition:
-The *doctor* enjoyed *her* day off.
-The *nurse* liked *his* new shoes.
+Incongruent condition:  
+The *doctor* enjoyed *her* day off.  
+The *nurse* liked *his* new shoes.  
 
 Here, we're interested in how people behave when they get to the pronouns *his* and *her*, so the areas/regions of interest (AOIs/IAs/ROIs) are those pronouns.  
 Often, the AOIs are determined by the design. There are, however, also procedures to find AOIs.
@@ -324,6 +322,7 @@ Visualizations in eye-tracking
 ========================================================
 
 **Reading data**
+
 
 Come up with a way to visualize the fixation durations and regression path lengths for the congruent compared to the incongruent conditions.
 
