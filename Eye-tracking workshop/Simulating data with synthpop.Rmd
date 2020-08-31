@@ -1,0 +1,70 @@
+---
+title: "Simulating data with synthpop"
+author: "Julia Müller"
+date: "31 8 2020"
+output: html_document
+---
+
+```{r}
+library(synthpop)
+library(tidyverse)
+library(hablar)
+
+df <- read_csv("J:/VS_TillResCorr_Eventstat_ControlTD.csv",
+               na = "-")
+
+df %>% 
+  group_by(Participant) %>% 
+  count()
+```
+
+Quick intro to Synthpop: https://synthpop.org.uk/get-started.html
+
+Selecting the variables I want and saving them in df_sim, then the syn command synthesises the new dataset  
+The compare function helps compare the old and new datasets  
+I took out the participant ID and later put that back in manually, I hope it still works! Something about the combination of either these particular factors or the number of factors generally just threw off the simulation, and I'm not sure why ¯\_(ツ)_/¯
+```{r}
+df_sim <- df %>% 
+  convert(fct(Stimulus, Category.Group, Participant, AOI.Name)) %>% 
+  dplyr::select(c(AOI.Name, Trial, Stimulus, Category.Group, Index,
+                  Event.Start.Trial.Time, Event.End.Trial.Time, Event.Duration))
+
+mysyn <- syn(df_sim)
+
+compare(mysyn, df_sim)
+```
+
+This is a bit roundabout - I can't directly add a variable to a syn object, so I'm exporting it, importing it again, and then adding the participant ID before exporting again
+```{r}
+write.syn(mysyn, file = "Divya's_sim_data_raw", filetype = "csv")
+
+d <- read_csv("Divya's_sim_data_raw.csv")
+
+d <- d %>% 
+  mutate(Participant = c(rep("p1", 1261), 
+           rep("p2", 1376),
+           rep("p3", 1310),
+           rep("p4", 1632),
+           rep("p5", 1492),
+           rep("p6", 1439),
+           rep("p7", 1626),
+           rep("p8", 1307),
+           rep("p9", 1570),
+           rep("p10", 1824),
+           rep("p11", 1619),
+           rep("p12", 1709),
+           rep("p13", 1529),
+           rep("p14", 1603),
+           rep("p15", 1499),
+           rep("p16", 1353),
+           rep("p17", 1716),
+           rep("p18", 1725),
+           rep("p19", 1680),
+           rep("p20", 1330),
+           rep("p21", 1427),
+           rep("p22", 1814)
+           ))
+
+write.csv(d, "Divya's_sim_data.csv")
+```
+
