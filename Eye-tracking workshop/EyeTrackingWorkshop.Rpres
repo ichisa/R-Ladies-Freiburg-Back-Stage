@@ -4,14 +4,13 @@ author: Julia and Divya
 date: 02.09.2020
 autosize: true
 
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
 
 
 The basic idea: What does eye-tracking do?
 ========================================================
-```{r, echo=FALSE}
-library(tidyverse); library(hablar); library(kableExtra)
-setwd("C:/Users/Lenovo/Documents/GitHub/R-Ladies-Freiburg-Back-Stage/Eye-tracking workshop")
+```{r, echo=FALSE, include=FALSE, results='hide', message=FALSE, warning=FALSE}
+#library(tidyverse); library(hablar); library(kableExtra)
+setwd("E:/R-Ladies/R-Ladies-Freiburg-Back-Stage/Eye-tracking workshop")
 ```
 
 Eye-tracking relies on the **eye-mind hypothesis/assumption**:  
@@ -194,11 +193,53 @@ knitr::include_graphics("files/EyelinkInterface.jpg")
 ...and an example of how our eyes move while we read [(video)](https://www.youtube.com/watch?v=j8-VYcYkgqY)
 
 
+
+Task Examples
+========================================================
+**An example of a reading experiment investigating gender stereotypes**
+
+Congruent condition:  
+The *doctor* enjoyed *his* day off.  
+The *nurse* liked *her* new shoes.  
+
+Incongruent condition:  
+The *doctor* enjoyed *her* day off.  
+The *nurse* liked *his* new shoes.  
+
+Here, we're interested in how people behave when they get to the pronouns *his* and *her*, so the areas/regions of interest (AOIs/IAs/ROIs) are those pronouns.  
+Often, the AOIs are determined by the design. There are, however, also procedures to find AOIs.
+
+
+Task Examples
+========================================================
+**The first free viewing experiment**
+
+```{r, echo=FALSE, out.width="75%", out.height="75%",fig.cap="Free Viewing"}
+knitr::include_graphics("files/FreeViewing.jpg")
+```
+
+
+Task Examples
+========================================================
+**Embedded Figures Task**
+
+```{r, echo=FALSE, out.width="75%", out.height="75%",fig.cap="Embedded Figures"}
+knitr::include_graphics("files/EmbeddedFIgures2.jpg")
+```
+
+
+Task Examples
+========================================================
+**Embedded Figures Task**
+
+```{r, echo=FALSE, out.width="75%", out.height="75%",fig.cap="Embedded Figures"}
+knitr::include_graphics("files/EmbeddedFigures1.jpg")
+```
+
+
 Let's look at some scan-paths
 ========================================================
 
-#I think we should show some examples first before we get technical, so I moved this slide up
-#I will have to switch to show videos here
 
 ![A scan-path for visual search with 3 Participants](files/Scan Path_B006,C001,D003.png)
 
@@ -222,24 +263,16 @@ Word of caution: These are not as categorical as may seem.
 
 What does eye-tracking data look like?
 ========================================================
-**An example of a reading experiment investigating gender stereotypes**
 
-Congruent condition:  
-The *doctor* enjoyed *his* day off.  
-The *nurse* liked *her* new shoes.  
+A distinction between 'Raw' and 'Event' data...
 
-Incongruent condition:  
-The *doctor* enjoyed *her* day off.  
-The *nurse* liked *his* new shoes.  
-
-Here, we're interested in how people behave when they get to the pronouns *his* and *her*, so the areas/regions of interest (AOIs/IAs/ROIs) are those pronouns.  
-Often, the AOIs are determined by the design. There are, however, also procedures to find AOIs.
+For the ease of data processing today, we will only use simulations of fixation data.
 
 
 What does eye-tracking data look like?
 ========================================================
 
-After exporting the data, you'll typically be left with a lot of variables. For example, here are the column names of an exported data file from an EyeLink 1000 eye-tracker:
+After exporting the event data, you'll typically be left with a lot of variables. For example, here are the column names of an exported data file from an EyeLink 1000 eye-tracker:
 ```{r, echo = FALSE}
 example_names <- c("RECORDING_SESSION_LABEL", "TRIAL_INDEX", "DATA_FILE", "EYE_USED", "IA_AREA", "IA_AVERAGE_FIX_PUPIL_SIZE", "IA_BOTTOM", "IA_DWELL_TIME", "IA_DWELL_TIME", "IA_DYNAMIC", "IA_END_TIME", "IA_FIRST_FIXATION_DURATION", "IA_FIRST_FIXATION_INDEX", "IA_FIRST_FIXATION_RUN_INDEX", "IA_FIRST_FIXATION_TIME", "IA_FIRST_FIXATION_VISITED_IA_COUNT", "IA_FIRST_FIXATION_X", "IA_FIRST_FIXATION_Y", "IA_FIRST_FIX_PROGRESSIVE", "IA_FIRST_RUN_DWELL_TIME", "IA_FIRST_RUN_END_TIME", "IA_FIRST_RUN_FIXATION_COUNT", "IA_FIRST_RUN_START_TIME", "IA_FIRST_SACCADE_AMPLITUDE", "IA_FIRST_SACCADE_ANGLE", "IA_FIRST_SACCADE_END_TIME", "IA_FIRST_SACCADE_INDEX", "IA_FIRST_SACCADE_START_TIME", "IA_FIXATION_COUNT", "IA_FSA_COUNT_1", "IA_FSA_COUNT_2", "IA_FSA_COUNT_3", "IA_FSA_COUNT_4", "IA_FSA_COUNT_5", "IA_FSA_COUNT_6", "IA_FSA_COUNT_7", "IA_FSA_COUNT_8", "IA_FSA_COUNT_9", "IA_FSA_COUNT_10", "IA_FSA_COUNT_11", "IA_FSA_COUNT_12", "IA_FSA_COUNT_13", "IA_FSA_COUNT_14", "IA_FSA_COUNT_15", "IA_FSA_COUNT_16", "IA_FSA_COUNT_17", "IA_FSA_COUNT_18", "IA_FSA_COUNT_19", "IA_FSA_COUNT_20", "IA_FSA_COUNT_21", "IA_FSA_COUNT_22", "IA_FSA_COUNT_23", "IA_FSA_COUNT_24", "A_FSA_COUNT_25", "IA_FSA_COUNT_26", "IA_FSA_COUNT_27", "IA_FSA_COUNT_28", "IA_FSA_COUNT_29", "IA_FSA_COUNT_30", "IA_FSA_COUNT_31", "IA_FSA_COUNT_32", "IA_FSA_COUNT_33", "IA_FSA_COUNT_34", "IA_FSA_COUNT_36", "IA_FSA_COUNT_37", "IA_FSA_COUNT_38", "IA_FSA_COUNT_39", "IA_FSA_DURATION_1", "IA_FSA_DURATION_2", "IA_FSA_DURATION_3", "IA_FSA_DURATION_4", "IA_FSA_DURATION_5", "IA_FSA_DURATION_6", "IA_FSA_DURATION_7", "IA_FSA_DURATION_8", "IA_FSA_DURATION_9", "IA_FSA_DURATION_10", "IA_FSA_DURATION_11", "IA_FSA_DURATION_12", "IA_FSA_DURATION_13", "IA_FSA_DURATION_14", "IA_FSA_DURATION_15", "IA_FSA_DURATION_16", "IA_FSA_DURATION_17", "IA_FSA_DURATION_18", "IA_FSA_DURATION_19", "IA_FSA_DURATION_20", "IA_FSA_DURATION_21", "IA_FSA_DURATION_22", "IA_FSA_DURATION_23", "IA_FSA_DURATION_24", "IA_FSA_DURATION_25", "IA_FSA_DURATION_26", "IA_FSA_DURATION_27", "IA_FSA_DURATION_28", "IA_FSA_DURATION_29", "IA_FSA_DURATION_30", "IA_FSA_DURATION_31", "IA_FSA_DURATION_32", "IA_FSA_DURATION_33", "IA_FSA_DURATION_34", "IA_FSA_DURATION_35", "IA_FSA_DURATION_36", "IA_FSA_DURATION_37", "IA_FSA_DURATION_38", "IA_FSA_DURATION_39", "IA_GROUP", "IA_ID", "IA_INSTANCES_COUNT", "IA_LABEL", "IA_LAST_FIXATION_DURATION", "IA_LAST_FIXATION_RUN", "IA_LAST_FIXATION_TIME", "IA_LAST_FIXATION_X", "IA_LAST_FIXATION_Y", "IA_LAST_RUN_DWELL_TIME", "IA_LAST_RUN_END_TIME", "IA_LAST_RUN_FIXATION", "IA_LAST_RUN_FIXATION_COUNT", "IA_LAST_RUN_START_TIME", "IA_LAST_SACCADE_AMPLITUDE", "IA_LAST_SACCADE_ANGLE", "IA_LAST_SACCADE_END_TIME", "IA_LAST_SACCADE_INDEX", "IA_LAST_SACCADE_START_TIME", "IA_LEFT", "IA_LEGAL", "IA_LEGAL_IMMEDIATE", "IA_MAX_FIX_PUPIL_SIZE", "IA_MIN_FIX_PUPIL_SIZE", "IA_POINTS", "IA_REGRESSION_IN", "IA_REGRESSION_IN_COUNT", "IA_REGRESSION_OUT", "IA_REGRESSION_OUT_COUNT", "IA_REGRESSION_OUT_FULL", "IA_REGRESSION_OUT_FULL_COUNT", "IA_REGRESSION_PATH_DURATION", "IA_RIGHT", "IA_RUN_COUNT", "IA_SECOND_FIXATION_DURATION", "IA_SECOND_FIXATION_RUN", "IA_SECOND_FIXATION_TIME", "IA_SECOND_FIXATION_X", "IA_SECOND_FIXATION_Y", "IA_SECOND_RUN_DWELL_TIME", "IA_SECOND_RUN_END_TIME", "IA_SECOND_RUN_FIXATION", "IA_SECOND_RUN_FIXATION_COUNT", "IA_SECOND_RUN_START_TIME", "IA_SELECTIVE_REGRESSION_PATH_DURATION", "IA_SKIP", "IA_SPILLOVER", "IA_START_TIME", "IA_THIRD_FIXATION_DURATION", "IA_THIRD_FIXATION_RUN", "IA_THIRD_FIXATION_TIME", "IA_THIRD_FIXATION_X", "IA_THIRD_FIXATION_Y", "IA_THIRD_RUN_DWELL_TIME", "IA_THIRD_RUN_END_TIME", "IA_THIRD_RUN_FIXATION", "IA_THIRD_RUN_FIXATION_COUNT", "IA_THIRD_RUN_START_TIME", "IA_TOP", "IA_TYPE", "IP_END_EVENT_MATCHED", "IP_END_TIME", "IP_INDEX", "IP_LABEL", "IP_START_EVENT_MATCHED", "IP_START_TIME", "REPORTING_METHOD", "TRIAL_DWELL_TIME", "TRIAL_FIXATION_COUNT", "TRIAL_IA_COUNT", "TRIAL_LABEL", "TRIAL_START_TIME", "TRIAL_TOTAL_VISITED_IA_COUNT", "ANSWER", "CORRECTNESS", "RT", "RT_START", "code", "condition", "correct_answer", "ending", "experiment", "item_id", "list", "question", "stimulus")
 
@@ -311,13 +344,12 @@ kbl(head(reading_data, 15)) %>%
 What does eye-tracking data look like?
 ========================================================
 
+**Visual Search data**
+
 Here is another simulated dataset. Let's spend some time talking about how this one is different.
-- What are all these columns?
-- Which ones do I need?
-- What could my research questions be?
 
 ```{r}
-
+VisualSearch_Sim <- read_csv("data/VIsualSearch_Sim.csv")
 ```
 
 
@@ -344,6 +376,16 @@ Considerations
 - Visualizing data versus visualizing statistics
 
 
+
+Statistical analysis of eye-tracking data
+========================================================
+- Scan-path analysis
+- Modeling
+- Mixed effects
+- Between group comparisons
+
+
+
 Working with eye-tracking data
 ========================================================
 type: prompt
@@ -359,6 +401,25 @@ To prepare this data for visualisation and modeling, we could
   - remove data points if the participants answered a question incorrectly
 - convert to the correct data types
 - use 'join' to add additional information such as word frequency or sociodemographic characteristics of the participants
+
+
+Working with eye-tracking data
+========================================================
+type: prompt
+incremental: true
+
+**Visual Search**
+
+- Explore the Data 
+  - some pre-processing has already been done before simulating the data.
+  Can you find out what that is?
+- Find first fixation on Target word, after stimulus onset
+- Find mean duration in Grid
+- Are there any outliers? Remove them
+- Find difference between first fixation on target/grid and end of trial
+- Visualise the variables you created above
+
+
 
 
 Working with eye-tracking data
@@ -397,27 +458,6 @@ reading_reduced %>%
 ```
 
 
-Statistical analysis of eye-tracking data
-========================================================
-Here we can talk about mixed effects models
-
-
-
-Hands-on work
-========================================================
-
-Pick one of the two datasets we discussed, and try answering one of the following questions with it
-
-For Dataset A
-- x
-- y
-- z
-
-For Dataset B
-- x
-- z
-- z
-
 
 Resources
 ========================================================
@@ -425,7 +465,7 @@ Resources
 **Books**
 
 - Conklin, K., Pellicer-Sanchez, A., & Carroll, G. (2018). *Eye-tracking: A guide for applied linguistics research*. Cambridge, New York, NY: Cambridge University Press.
-
+- Klein, C., & Ettinger, U. (Eds.). (2019). *Eye Movement Research: An Introduction to Its Scientific Foundations and Applications*. Springer Nature.
 
 ***
 
