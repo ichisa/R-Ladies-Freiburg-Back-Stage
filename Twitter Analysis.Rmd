@@ -1,0 +1,117 @@
+---
+title: "Twitter Analysis"
+author: "Divya"
+date: "5 1 2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Twitter Analysis
+
+What kind of data do you expect to get?
+How is it different from what we have been doing till now?
+What about text? How do you think that works?
+Has anyone worked with text before?
+
+### First we get packages
+If you do not already have them, install and load the following packages
+
+```{r, echo=FALSE}
+library(tidyverse)
+library(tm)
+library(rtweet)
+library(wordcloud2)
+library(tidytext)
+```
+
+### What kind of data can we get using the 'rtweet' package?
+
+We will try and do three basic things.
+1. Get the last 1000 tweets for #rstats
+2. get the last 200 tweets the R-Ladies Freiburg account marked as favourites
+3. Try and plot when the #rstats tweets were most active
+
+You can check the [rtweet info](https://rtweet.info/)for more functions you can use.
+
+```{r}
+#Using the search_tweets function
+rstats_tweets <- search_tweets("#rstats", n = 1000, include_rts = FALSE) ## Please reduce this number if you think your laptop won't be able to handle it
+
+#Using get_favourites
+what_we_like <- get_favorites("rladiesfreiburg", n = 200)
+
+## plot time series of tweets
+rstats_tweets %>%
+  ts_plot("1 hours") +
+  ggplot2::theme_minimal() +
+  ggplot2::theme(plot.title = ggplot2::element_text(face = "bold")) +
+  ggplot2::labs(
+    x = NULL, y = NULL,
+    title = "Frequency of #rstats Twitter statuses",
+    subtitle = "Twitter status (tweet) counts aggregated per hour",
+    caption = "\nSource: Data collected from Twitter's REST API via rtweet"
+  )
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+Question - will you get the same plot everytime to run this code?
+
+
+### Now lets try and analyse the actual text of the tweets
+
+```{r}
+tweets <- search_tweets("#HappyNewYear2020", n = 200, include_rts = FALSE)
+text <- tweets$text
+# Create a corpus  
+docs <- Corpus(VectorSource(text))
+docs <- docs %>%
+  tm_map(removeNumbers) %>%
+  tm_map(removePunctuation) %>%
+  tm_map(stripWhitespace)
+docs <- tm_map(docs, removeWords, stopwords("english"))
+
+dtm <- TermDocumentMatrix(docs) 
+matrix <- as.matrix(dtm) 
+words <- sort(rowSums(matrix),decreasing=TRUE) 
+df <- data.frame(word = names(words),freq=words)
+
+```
+
+### Wordclouds
+Now we have the text as separate words and their frequencies. How do we visualize this?
+
+```{r}
+
+wordcloud2(data=df, size=2.5, color='random-dark')
+
+```
+
+How do you find the wordcloud? It also tells you the frequency of words! But - It still requires a lot more cleaning! What all do we have to consider? We could go on with different kinds of cleanings... There are a host of things available online.
+
+### Sentiment Analysis.
+There are a number of lexicon used for sentiment analysis - some have categories, some have ratings. We'll look at the 'tidytext' package today which has three possibilities
+
+1. AFINN from Finn Årup Nielsen,
+2. bing from Bing Liu and collaborators, and
+3. nrc from Saif Mohammad and Peter Turney.
+
+Let's try the nrc lexicon today. We will match our works with the words in the lexicon and select those classified as 'possitive'.
+
+```{r}
+
+nrc <- get_sentiments("nrc") %>% 
+  filter(sentiment == "positive")
+
+PositiveWords<-df %>%
+  inner_join(nrc)
+
+wordcloud2(data=PositiveWords, size=2.5, color='random-dark')
+
+```
+
