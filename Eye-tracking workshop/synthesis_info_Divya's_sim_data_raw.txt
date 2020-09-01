@@ -1,0 +1,11 @@
+Date saved: 31 Aug 2020, 22:04 
+Data frame with original data: df_sim 
+Number of synthetic data sets: 1 
+Output file(s):(csv) Divya's_sim_data_raw.csv
+Additional file: synobject_Divya's_sim_data_raw.RData
+Methods used:
+              AOI.Name                  Trial               Stimulus         Category.Group 
+              "sample"                 "cart"                 "cart"                 "cart" 
+                 Index Event.Start.Trial.Time   Event.End.Trial.Time         Event.Duration 
+                "cart"                 "cart"                 "cart"                 "cart" 
+Seed used: 503523087 

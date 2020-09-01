@@ -10,7 +10,8 @@ For more details on authoring R presentations please visit <https://support.rstu
 The basic idea: What does eye-tracking do?
 ========================================================
 ```{r, echo=FALSE}
-library(tidyverse); library(hablar)
+library(tidyverse); library(hablar); library(kableExtra)
+setwd("C:/Users/Lenovo/Documents/GitHub/R-Ladies-Freiburg-Back-Stage/Eye-tracking workshop")
 ```
 
 Eye-tracking relies on the **eye-mind hypothesis/assumption**:  
@@ -97,7 +98,7 @@ knitr::include_graphics("files/Lab set-up.png")
 Eye-tracking systems: Workstation/desktop
 ========================================================
 
-```{r, echo=FALSE, out.width="50%", out.height="50%", fig.cap="Desktop Trackers"}
+```{r, echo=FALSE, fig.cap="Desktop Trackers"}
 knitr::include_graphics("files/Workstation.jpg")
 ```
 
@@ -105,12 +106,12 @@ knitr::include_graphics("files/Workstation.jpg")
 Eye-tracking systems: Glasses
 ========================================================
 
-```{r, echo=FALSE, out.width="50%", out.height="50%",fig.cap="Mobile Trackers"}
+```{r, echo=FALSE, out.width="75%", out.height="75%",fig.cap="Mobile Trackers"}
 knitr::include_graphics("files/IMG-20151230-WA0007.jpg")
 ```
 
 
-Considerations
+Eye-tracking systems: Considerations
 ========================================================
 
 **Practicality**
@@ -148,10 +149,28 @@ Where can you use eye-tracking?
 - Consumer behaviour
 - Expertise and training
 
-...and for many different kinds of participants
+...and for **many different kinds of participants**
 
 
-Considerations 
+Eye-tracking: Pros and cons
+========================================================
+
+**Advantages**
+- High temporal resolution
+- Non-invasive
+- On-line measure of processing
+- (Fairly) natural
+- No other task needed
+
+***
+
+**Diasadvantages**
+- Integrating with behavioural data
+- Subjectivity of AOIs
+- Operational definitions of fixations/saccades
+
+
+Considerations: Experimental setup 
 ========================================================
 
 - Calibration and validation [(video)](https://youtu.be/FPkRxzSE0bk?t=52)
@@ -184,7 +203,6 @@ Let's look at some scan-paths
 ![A scan-path for visual search with 3 Participants](files/Scan Path_B006,C001,D003.png)
 
 
-
 What kind of data can you get from eye-trackers?
 ========================================================
 type: prompt
@@ -201,15 +219,6 @@ What parameters could we get from these? How could they compliment each other?
 
 Word of caution: These are not as categorical as may seem.
 
-
-What does eye-tracking data look like?
-========================================================
-
-An example with reading data
-```{r, echo=FALSE, fig.cap="Example data"}
-knitr::include_graphics("files/ReadingData.png")
-knitr::include_graphics("files/ExampleData.JPG")
-```
 
 What does eye-tracking data look like?
 ========================================================
@@ -234,8 +243,9 @@ After exporting the data, you'll typically be left with a lot of variables. For 
 ```{r, echo = FALSE}
 example_names <- c("RECORDING_SESSION_LABEL", "TRIAL_INDEX", "DATA_FILE", "EYE_USED", "IA_AREA", "IA_AVERAGE_FIX_PUPIL_SIZE", "IA_BOTTOM", "IA_DWELL_TIME", "IA_DWELL_TIME", "IA_DYNAMIC", "IA_END_TIME", "IA_FIRST_FIXATION_DURATION", "IA_FIRST_FIXATION_INDEX", "IA_FIRST_FIXATION_RUN_INDEX", "IA_FIRST_FIXATION_TIME", "IA_FIRST_FIXATION_VISITED_IA_COUNT", "IA_FIRST_FIXATION_X", "IA_FIRST_FIXATION_Y", "IA_FIRST_FIX_PROGRESSIVE", "IA_FIRST_RUN_DWELL_TIME", "IA_FIRST_RUN_END_TIME", "IA_FIRST_RUN_FIXATION_COUNT", "IA_FIRST_RUN_START_TIME", "IA_FIRST_SACCADE_AMPLITUDE", "IA_FIRST_SACCADE_ANGLE", "IA_FIRST_SACCADE_END_TIME", "IA_FIRST_SACCADE_INDEX", "IA_FIRST_SACCADE_START_TIME", "IA_FIXATION_COUNT", "IA_FSA_COUNT_1", "IA_FSA_COUNT_2", "IA_FSA_COUNT_3", "IA_FSA_COUNT_4", "IA_FSA_COUNT_5", "IA_FSA_COUNT_6", "IA_FSA_COUNT_7", "IA_FSA_COUNT_8", "IA_FSA_COUNT_9", "IA_FSA_COUNT_10", "IA_FSA_COUNT_11", "IA_FSA_COUNT_12", "IA_FSA_COUNT_13", "IA_FSA_COUNT_14", "IA_FSA_COUNT_15", "IA_FSA_COUNT_16", "IA_FSA_COUNT_17", "IA_FSA_COUNT_18", "IA_FSA_COUNT_19", "IA_FSA_COUNT_20", "IA_FSA_COUNT_21", "IA_FSA_COUNT_22", "IA_FSA_COUNT_23", "IA_FSA_COUNT_24", "A_FSA_COUNT_25", "IA_FSA_COUNT_26", "IA_FSA_COUNT_27", "IA_FSA_COUNT_28", "IA_FSA_COUNT_29", "IA_FSA_COUNT_30", "IA_FSA_COUNT_31", "IA_FSA_COUNT_32", "IA_FSA_COUNT_33", "IA_FSA_COUNT_34", "IA_FSA_COUNT_36", "IA_FSA_COUNT_37", "IA_FSA_COUNT_38", "IA_FSA_COUNT_39", "IA_FSA_DURATION_1", "IA_FSA_DURATION_2", "IA_FSA_DURATION_3", "IA_FSA_DURATION_4", "IA_FSA_DURATION_5", "IA_FSA_DURATION_6", "IA_FSA_DURATION_7", "IA_FSA_DURATION_8", "IA_FSA_DURATION_9", "IA_FSA_DURATION_10", "IA_FSA_DURATION_11", "IA_FSA_DURATION_12", "IA_FSA_DURATION_13", "IA_FSA_DURATION_14", "IA_FSA_DURATION_15", "IA_FSA_DURATION_16", "IA_FSA_DURATION_17", "IA_FSA_DURATION_18", "IA_FSA_DURATION_19", "IA_FSA_DURATION_20", "IA_FSA_DURATION_21", "IA_FSA_DURATION_22", "IA_FSA_DURATION_23", "IA_FSA_DURATION_24", "IA_FSA_DURATION_25", "IA_FSA_DURATION_26", "IA_FSA_DURATION_27", "IA_FSA_DURATION_28", "IA_FSA_DURATION_29", "IA_FSA_DURATION_30", "IA_FSA_DURATION_31", "IA_FSA_DURATION_32", "IA_FSA_DURATION_33", "IA_FSA_DURATION_34", "IA_FSA_DURATION_35", "IA_FSA_DURATION_36", "IA_FSA_DURATION_37", "IA_FSA_DURATION_38", "IA_FSA_DURATION_39", "IA_GROUP", "IA_ID", "IA_INSTANCES_COUNT", "IA_LABEL", "IA_LAST_FIXATION_DURATION", "IA_LAST_FIXATION_RUN", "IA_LAST_FIXATION_TIME", "IA_LAST_FIXATION_X", "IA_LAST_FIXATION_Y", "IA_LAST_RUN_DWELL_TIME", "IA_LAST_RUN_END_TIME", "IA_LAST_RUN_FIXATION", "IA_LAST_RUN_FIXATION_COUNT", "IA_LAST_RUN_START_TIME", "IA_LAST_SACCADE_AMPLITUDE", "IA_LAST_SACCADE_ANGLE", "IA_LAST_SACCADE_END_TIME", "IA_LAST_SACCADE_INDEX", "IA_LAST_SACCADE_START_TIME", "IA_LEFT", "IA_LEGAL", "IA_LEGAL_IMMEDIATE", "IA_MAX_FIX_PUPIL_SIZE", "IA_MIN_FIX_PUPIL_SIZE", "IA_POINTS", "IA_REGRESSION_IN", "IA_REGRESSION_IN_COUNT", "IA_REGRESSION_OUT", "IA_REGRESSION_OUT_COUNT", "IA_REGRESSION_OUT_FULL", "IA_REGRESSION_OUT_FULL_COUNT", "IA_REGRESSION_PATH_DURATION", "IA_RIGHT", "IA_RUN_COUNT", "IA_SECOND_FIXATION_DURATION", "IA_SECOND_FIXATION_RUN", "IA_SECOND_FIXATION_TIME", "IA_SECOND_FIXATION_X", "IA_SECOND_FIXATION_Y", "IA_SECOND_RUN_DWELL_TIME", "IA_SECOND_RUN_END_TIME", "IA_SECOND_RUN_FIXATION", "IA_SECOND_RUN_FIXATION_COUNT", "IA_SECOND_RUN_START_TIME", "IA_SELECTIVE_REGRESSION_PATH_DURATION", "IA_SKIP", "IA_SPILLOVER", "IA_START_TIME", "IA_THIRD_FIXATION_DURATION", "IA_THIRD_FIXATION_RUN", "IA_THIRD_FIXATION_TIME", "IA_THIRD_FIXATION_X", "IA_THIRD_FIXATION_Y", "IA_THIRD_RUN_DWELL_TIME", "IA_THIRD_RUN_END_TIME", "IA_THIRD_RUN_FIXATION", "IA_THIRD_RUN_FIXATION_COUNT", "IA_THIRD_RUN_START_TIME", "IA_TOP", "IA_TYPE", "IP_END_EVENT_MATCHED", "IP_END_TIME", "IP_INDEX", "IP_LABEL", "IP_START_EVENT_MATCHED", "IP_START_TIME", "REPORTING_METHOD", "TRIAL_DWELL_TIME", "TRIAL_FIXATION_COUNT", "TRIAL_IA_COUNT", "TRIAL_LABEL", "TRIAL_START_TIME", "TRIAL_TOTAL_VISITED_IA_COUNT", "ANSWER", "CORRECTNESS", "RT", "RT_START", "code", "condition", "correct_answer", "ending", "experiment", "item_id", "list", "question", "stimulus")
 
-# I know only the first 15 or so rows are visible and will check a way to scroll through it
-example_names
+kbl(example_names) %>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "500px")
 ```
 
 
@@ -244,12 +254,9 @@ What does eye-tracking data look like?
 
 **Reading data**
 
-Here is some simulated data from a reading experiment like the one on gender stereotypes explained on one of the previous slides. Let's spend some time talking about it.
-- What are all these columns?
-- What could my research question be?
-- Do I need all columns and all data points to answer it?
+Here is some simulated data from a reading experiment like the one on gender stereotypes explained on one of the previous slides:
 
-```{r, echo=FALSE}
+```{r echo = FALSE}
 #simulating data
 reading_data <- tibble(
   RECORDING_SESSION_LABEL = rep(c("p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", 
@@ -281,12 +288,60 @@ reading_data <- tibble(
                                      rnorm(6, 500, 70), rnorm(6, 200, 40)), 8)
   )
 
-summary(reading_data)
+socio_data <- tibble(
+  participant = c("p1", "p2", "p3", "p4", "p5", "p6", "p7", "p8", 
+                  "p9", "p10", "p11", "p12", "p13", "p14", "p15", "p16"),
+  gender = rep(c("m", "f"), each = 8),
+  age = as.integer(rnorm(16, 30, 5))
+)
+
+# exporting
+#write_csv(reading_data, "data/reading_example_raw.csv")
+#write_csv(socio_data, "data/sociodemographic_info.csv")
+
+# data changed manually to add NAs and outliers
+reading_data <- read_csv("data/reading_example.csv")
+
+kbl(head(reading_data, 15)) %>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "400px")
 ```
 
-```{r, echo = FALSE}
-write_csv(reading_data, "data/reading_example.csv")
+
+What does eye-tracking data look like?
+========================================================
+
+Here is another simulated dataset. Let's spend some time talking about how this one is different.
+- What are all these columns?
+- Which ones do I need?
+- What could my research questions be?
+
+```{r}
+
 ```
+
+
+Working with eye-tracking data
+========================================================
+
+Pick one of the two datasets to work on.
+
+- Read it in
+- Prepare the data for visualisation (and statistical modeling)
+- Come up with a visualisation (or two)
+- Optional: Run a model on the data
+
+
+Visualizations in eye-tracking
+========================================================
+
+Many, many ways to do it!
+- Maybe an advanced workshop on this?
+
+Considerations
+- What kind of analysis you're doing
+- Which packages/softwares/shiny apps are available
+- Visualizing data versus visualizing statistics
 
 
 Working with eye-tracking data
@@ -310,21 +365,17 @@ Working with eye-tracking data
 ========================================================
 
 ```{r}
+reading_data <- read_csv("data/reading_example.csv", na = ".")
 reading_reduced <- reading_data %>% 
   select(-c(EYE_USED, DATA_FILE)) %>% 
   filter(IA_LABEL %in% c("his", "her"))
-
-glimpse(reading_reduced)
 ```
 
-
-Visualizations in eye-tracking
-========================================================
-
-**Reading data**
-
-
-Come up with a way to visualize the fixation durations and regression path lengths for the congruent compared to the incongruent conditions.
+```{r, echo = FALSE}
+kbl(head(reading_reduced, 15)) %>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "400px")
+```
 
 
 Visualizations in eye-tracking
@@ -344,51 +395,6 @@ reading_reduced %>%
   aes(condition, IA_REGRESSION_PATH_DURATION) +
   geom_violin()
 ```
-
-
-Visualizations in eye-tracking
-========================================================
-
-Many, many ways to do it!
-- Maybe an advanced workshop on this?
-
-Considerations
-- What kind of analysis you're doing
-- Which packages/softwares/shiny apps are available
-- Visualizing data versus visualizing statistics
-
-
-What does eye-tracking data look like?
-========================================================
-
-Here is another simulated dataset. Let's spend some time talking about how this one is different.
-- What are all these columns?
-- Which ones do I need?
-- What could my research questions be?
-
-```{r}
-
-```
-
-
-Eye-tracking: Pros and cons
-========================================================
-
-
-
-**Advantages**
-- High temporal resolution
-- Non-invasive
-- On-line measure of processing
-- (Fairly) natural
-- No other task needed
-
-***
-
-**Diasadvantages**
-- Integrating with behavioural data
-- Subjectivity of AOIs
-- Operational definitions of fixations/saccades
 
 
 Statistical analysis of eye-tracking data
@@ -413,7 +419,20 @@ For Dataset B
 - z
 
 
-Links and other resources
+Resources
 ========================================================
 
+**Books**
+
+- Conklin, K., Pellicer-Sanchez, A., & Carroll, G. (2018). *Eye-tracking: A guide for applied linguistics research*. Cambridge, New York, NY: Cambridge University Press.
+
+
+***
+
+**Links**
+- https://sccn.ucsd.edu/~mgrivich/eyetracking.html
+- https://imotions.com/blog/eye-tracking-work/
+- https://www.researchgate.net/figure/Eye-tracking-workstation-mobile-eye-tracker-eye-tracking-glasses-Tobii-2014-SMI_fig20_311279776
+- http://www.ifa.uni.wroc.pl/linguistics/?page_id=254
+- https://www.mrn.org/collaborate/imaging-resources
 
