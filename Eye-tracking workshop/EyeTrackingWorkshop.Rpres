@@ -3,14 +3,15 @@ Eye-Tracking Workshop
 author: Julia and Divya
 date: 02.09.2020
 autosize: true
-
+font-family: 'Lato'
 
 
 The basic idea: What does eye-tracking do?
 ========================================================
 ```{r, echo=FALSE, include=FALSE, results='hide', message=FALSE, warning=FALSE}
-#library(tidyverse); library(hablar); library(kableExtra)
-setwd("E:/R-Ladies/R-Ladies-Freiburg-Back-Stage/Eye-tracking workshop")
+library(tidyverse); library(hablar); library(kableExtra); library(lme4)
+#setwd("E:/R-Ladies/R-Ladies-Freiburg-Back-Stage/Eye-tracking workshop")
+setwd("C:/Users/Lenovo/Documents/GitHub/R-Ladies-Freiburg-Back-Stage/Eye-tracking workshop")
 ```
 
 Eye-tracking relies on the **eye-mind hypothesis/assumption**:  
@@ -36,11 +37,9 @@ Now read this sentence:
 *The old man the boat.*
 
 What happened when you read this sentence, and why?  
-
 Which word(s) did you get stuck on?
 
-Typically, people interpret *old* as an adjective which refers to *man* as a noun. But here, *old* is a noun and *man* a verb instead, so in **garden-path sentences** like these, readers need to update their interpretations.  
-In this example, we'd typically see a delay on *the* because that's when readers realise their initial interpretation can't be correct.
+Typically, people interpret *old* as an adjective which refers to *man* as a noun. But here, *old* is a noun and *man* a verb instead, so in **garden-path sentences** like these, readers need to update their interpretations. We'd typically see a delay on *the* because that's when readers realise their initial interpretation can't be correct.
 
 
 How do eye-trackers work?
@@ -207,7 +206,7 @@ The *doctor* enjoyed *her* day off.
 The *nurse* liked *his* new shoes.  
 
 Here, we're interested in how people behave when they get to the pronouns *his* and *her*, so the areas/regions of interest (AOIs/IAs/ROIs) are those pronouns.  
-Often, the AOIs are determined by the design. There are, however, also procedures to find AOIs.
+<small>Often, the AOIs are determined by the design. There are, however, also procedures to find AOIs.</small>
 
 
 Task Examples
@@ -239,7 +238,6 @@ knitr::include_graphics("files/EmbeddedFigures1.jpg")
 
 Let's look at some scan-paths
 ========================================================
-
 
 ![A scan-path for visual search with 3 Participants](files/Scan Path_B006,C001,D003.png)
 
@@ -349,7 +347,7 @@ What does eye-tracking data look like?
 Here is another simulated dataset. Let's spend some time talking about how this one is different.
 
 ```{r}
-VisualSearch_Sim <- read_csv("data/VIsualSearch_Sim.csv")
+#VisualSearch_Sim <- read_csv("data/VIsualSearch_Sim.csv")
 ```
 
 
@@ -376,14 +374,12 @@ Considerations
 - Visualizing data versus visualizing statistics
 
 
-
 Statistical analysis of eye-tracking data
 ========================================================
 - Scan-path analysis
 - Modeling
 - Mixed effects
 - Between group comparisons
-
 
 
 Working with eye-tracking data
@@ -420,22 +416,27 @@ incremental: true
 - Visualise the variables you created above
 
 
-
-
 Working with eye-tracking data
 ========================================================
 
 ```{r}
 reading_data <- read_csv("data/reading_example.csv", na = ".")
+socio_data <- read_csv("data/sociodemographic_info.csv")
+
 reading_reduced <- reading_data %>% 
   select(-c(EYE_USED, DATA_FILE)) %>% 
   filter(IA_LABEL %in% c("his", "her"))
+
+reading <- left_join(reading_reduced, socio_data, by = c("RECORDING_SESSION_LABEL" = "participant"))
 ```
 
+
+Working with eye-tracking data
+========================================================
 ```{r, echo = FALSE}
-kbl(head(reading_reduced, 15)) %>%
+kbl(head(reading, 15)) %>%
   kable_paper() %>%
-  scroll_box(width = "100%", height = "400px")
+  scroll_box(width = "100%", height = "700px")
 ```
 
 
@@ -443,20 +444,70 @@ Visualizations in eye-tracking
 ========================================================
 
 ```{r, echo = FALSE}
-# super basic examples, just to give you an idea
-reading_reduced %>% 
+reading %>% 
   ggplot() +
   aes(condition, IA_FIRST_FIXATION_DURATION) +
-  geom_violin()
+  geom_violin() +
+  ylab("First fixation duration on 'his'/'her'") +
+  theme_minimal()
 ```
 ***
 ```{r, echo = FALSE}
-reading_reduced %>% 
+reading %>% 
   ggplot() +
   aes(condition, IA_REGRESSION_PATH_DURATION) +
-  geom_violin()
+  geom_violin() +
+  ylab("Regression path duration from 'his'/'her'") +
+  theme_minimal()
 ```
 
+
+Visualizations in eye-tracking
+========================================================
+...without the outlier:  
+```{r, echo = FALSE}
+reading <- reading %>% filter(IA_FIRST_FIXATION_DURATION < 300)
+reading %>% 
+  ggplot() +
+  aes(condition, IA_FIRST_FIXATION_DURATION) +
+  geom_violin() +
+  ylab("First fixation duration on 'his'/'her'") +
+  theme_minimal()
+```
+
+
+Visualizations in eye-tracking
+========================================================
+...by gender:  
+```{r, echo = FALSE}
+reading %>% 
+  ggplot() +
+  aes(condition, IA_FIRST_FIXATION_DURATION) +
+  geom_violin() +
+  facet_wrap(~ gender) +
+  ylab("First fixation duration on 'his'/'her'") +
+  theme_minimal()
+```
+
+
+Interpretation/modeling
+========================================================
+type: prompt
+incremental: true
+
+- longer first fixations in incongruent conditions
+- longer regressions in incongruent conditions
+  - but: more variability
+- interpretation: incongruent combinations (*doctor* + *she*, *nurse* + *he*) are more difficult to process
+
+```{r eval=FALSE}
+fixations_mod <- lmer(IA_FIRST_FIXATION_DURATION ~ condition * gender + 
+  (1 + condition * gender | RECORDING_SESSION_LABEL),
+   data = reading)
+regressions_mod <- lmer(IA_REGRESSION_PATH_DURATION ~ condition * gender + 
+  (1 + condition * gender | RECORDING_SESSION_LABEL),
+   data = reading)
+```
 
 
 Resources
