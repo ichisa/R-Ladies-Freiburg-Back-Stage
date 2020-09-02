@@ -3,8 +3,7 @@ Eye-Tracking Workshop
 author: Julia and Divya
 date: 02.09.2020
 autosize: true
-
-For more details on authoring R presentations please visit <https://support.rstudio.com/hc/en-us/articles/200486468>.
+font-family: 'Lato'
 
 
 The basic idea: What does eye-tracking do?
@@ -34,11 +33,9 @@ Now read this sentence:
 *The old man the boat.*
 
 What happened when you read this sentence, and why?  
-
 Which word(s) did you get stuck on?
 
-Typically, people interpret *old* as an adjective which refers to *man* as a noun. But here, *old* is a noun and *man* a verb instead, so in **garden-path sentences** like these, readers need to update their interpretations.  
-In this example, we'd typically see a delay on *the* because that's when readers realise their initial interpretation can't be correct.
+Typically, people interpret *old* as an adjective which refers to *man* as a noun. But here, *old* is a noun and *man* a verb instead, so in **garden-path sentences** like these, readers need to update their interpretations. We'd typically see a delay on *the* because that's when readers realise their initial interpretation can't be correct.
 
 
 How do eye-trackers work?
@@ -175,11 +172,46 @@ Typical eye-tracking procedure
 ...and an example of how our eyes move while we read [(video)](https://www.youtube.com/watch?v=j8-VYcYkgqY)
 
 
+
+Task Examples
+========================================================
+**An example of a reading experiment investigating gender stereotypes**
+
+Congruent condition:  
+The *doctor* enjoyed *his* day off.  
+The *nurse* liked *her* new shoes.  
+
+Incongruent condition:  
+The *doctor* enjoyed *her* day off.  
+The *nurse* liked *his* new shoes.  
+
+Here, we're interested in how people behave when they get to the pronouns *his* and *her*, so the areas/regions of interest (AOIs/IAs/ROIs) are those pronouns.  
+<small>Often, the AOIs are determined by the design. There are, however, also procedures to find AOIs.</small>
+
+
+Task Examples
+========================================================
+**The first free viewing experiment**
+
+<img src="files/FreeViewing.jpg" title="Free Viewing" alt="Free Viewing" width="75%" height="75%" />
+
+
+Task Examples
+========================================================
+**Embedded Figures Task**
+
+<img src="files/EmbeddedFIgures2.jpg" title="Embedded Figures" alt="Embedded Figures" width="75%" height="75%" />
+
+
+Task Examples
+========================================================
+**Embedded Figures Task**
+
+<img src="files/EmbeddedFigures1.jpg" title="Embedded Figures" alt="Embedded Figures" width="75%" height="75%" />
+
+
 Let's look at some scan-paths
 ========================================================
-
-#I think we should show some examples first before we get technical, so I moved this slide up
-#I will have to switch to show videos here
 
 ![A scan-path for visual search with 3 Participants](files/Scan Path_B006,C001,D003.png)
 
@@ -203,24 +235,16 @@ Word of caution: These are not as categorical as may seem.
 
 What does eye-tracking data look like?
 ========================================================
-**An example of a reading experiment investigating gender stereotypes**
 
-Congruent condition:  
-The *doctor* enjoyed *his* day off.  
-The *nurse* liked *her* new shoes.  
+A distinction between 'Raw' and 'Event' data...
 
-Incongruent condition:  
-The *doctor* enjoyed *her* day off.  
-The *nurse* liked *his* new shoes.  
-
-Here, we're interested in how people behave when they get to the pronouns *his* and *her*, so the areas/regions of interest (AOIs/IAs/ROIs) are those pronouns.  
-Often, the AOIs are determined by the design. There are, however, also procedures to find AOIs.
+For the ease of data processing today, we will only use simulations of fixation data.
 
 
 What does eye-tracking data look like?
 ========================================================
 
-After exporting the data, you'll typically be left with a lot of variables. For example, here are the column names of an exported data file from an EyeLink 1000 eye-tracker:
+After exporting the event data, you'll typically be left with a lot of variables. For example, here are the column names of an exported data file from an EyeLink 1000 eye-tracker:
 <div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:500px; overflow-x: scroll; width:100%; "><table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
  <thead>
   <tr>
@@ -1018,12 +1042,14 @@ Here is some simulated data from a reading experiment like the one on gender ste
 What does eye-tracking data look like?
 ========================================================
 
+**Visual Search data**
+
 Here is another simulated dataset. Let's spend some time talking about how this one is different.
-- What are all these columns?
-- Which ones do I need?
-- What could my research questions be?
 
 
+```r
+#VisualSearch_Sim <- read_csv("data/VIsualSearch_Sim.csv")
+```
 
 
 Working with eye-tracking data
@@ -1049,6 +1075,14 @@ Considerations
 - Visualizing data versus visualizing statistics
 
 
+Statistical analysis of eye-tracking data
+========================================================
+- Scan-path analysis
+- Modeling
+- Mixed effects
+- Between group comparisons
+
+
 Working with eye-tracking data
 ========================================================
 type: prompt
@@ -1068,16 +1102,40 @@ To prepare this data for visualisation and modeling, we could
 
 Working with eye-tracking data
 ========================================================
+type: prompt
+incremental: true
+
+**Visual Search**
+
+- Explore the Data 
+  - some pre-processing has already been done before simulating the data.
+  Can you find out what that is?
+- Find first fixation on Target word, after stimulus onset
+- Find mean duration in Grid
+- Are there any outliers? Remove them
+- Find difference between first fixation on target/grid and end of trial
+- Visualise the variables you created above
+
+
+Working with eye-tracking data
+========================================================
 
 
 ```r
 reading_data <- read_csv("data/reading_example.csv", na = ".")
+socio_data <- read_csv("data/sociodemographic_info.csv")
+
 reading_reduced <- reading_data %>% 
   select(-c(EYE_USED, DATA_FILE)) %>% 
   filter(IA_LABEL %in% c("his", "her"))
+
+reading <- left_join(reading_reduced, socio_data, by = c("RECORDING_SESSION_LABEL" = "participant"))
 ```
 
-<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:400px; overflow-x: scroll; width:100%; "><table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
+
+Working with eye-tracking data
+========================================================
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:700px; overflow-x: scroll; width:100%; "><table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
  <thead>
   <tr>
    <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> RECORDING_SESSION_LABEL </th>
@@ -1088,6 +1146,8 @@ reading_reduced <- reading_data %>%
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> IA_FIRST_FIXATION_DURATION </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> TRIAL_FIXATION_COUNT </th>
    <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> IA_REGRESSION_PATH_DURATION </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> gender </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> age </th>
   </tr>
  </thead>
 <tbody>
@@ -1100,6 +1160,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 176.7566 </td>
    <td style="text-align:right;"> 9 </td>
    <td style="text-align:right;"> 271.6653 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 26 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p1 </td>
@@ -1110,6 +1172,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 239.0494 </td>
    <td style="text-align:right;"> 9 </td>
    <td style="text-align:right;"> 352.9924 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 26 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p2 </td>
@@ -1120,6 +1184,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> NA </td>
    <td style="text-align:right;"> 9 </td>
    <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 34 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p2 </td>
@@ -1130,6 +1196,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 595.3913 </td>
    <td style="text-align:right;"> 9 </td>
    <td style="text-align:right;"> 239.8634 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 34 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p3 </td>
@@ -1140,6 +1208,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 176.7566 </td>
    <td style="text-align:right;"> 12 </td>
    <td style="text-align:right;"> 271.6653 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 30 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p3 </td>
@@ -1150,6 +1220,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 239.0494 </td>
    <td style="text-align:right;"> 12 </td>
    <td style="text-align:right;"> 352.9924 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 30 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p4 </td>
@@ -1160,6 +1232,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 252.6243 </td>
    <td style="text-align:right;"> 12 </td>
    <td style="text-align:right;"> 516.5196 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 40 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p4 </td>
@@ -1170,6 +1244,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 195.3913 </td>
    <td style="text-align:right;"> 12 </td>
    <td style="text-align:right;"> 239.8634 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 40 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p5 </td>
@@ -1180,6 +1256,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 176.7566 </td>
    <td style="text-align:right;"> 14 </td>
    <td style="text-align:right;"> 271.6653 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 32 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p5 </td>
@@ -1190,6 +1268,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 239.0494 </td>
    <td style="text-align:right;"> 14 </td>
    <td style="text-align:right;"> 352.9924 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 32 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p6 </td>
@@ -1200,6 +1280,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 252.6243 </td>
    <td style="text-align:right;"> 14 </td>
    <td style="text-align:right;"> 516.5196 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 25 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p6 </td>
@@ -1210,6 +1292,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 195.3913 </td>
    <td style="text-align:right;"> 14 </td>
    <td style="text-align:right;"> 239.8634 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 25 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p7 </td>
@@ -1220,6 +1304,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 176.7566 </td>
    <td style="text-align:right;"> 8 </td>
    <td style="text-align:right;"> 271.6653 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 33 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p7 </td>
@@ -1230,6 +1316,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 239.0494 </td>
    <td style="text-align:right;"> 8 </td>
    <td style="text-align:right;"> 352.9924 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 33 </td>
   </tr>
   <tr>
    <td style="text-align:left;"> p8 </td>
@@ -1240,6 +1328,8 @@ reading_reduced <- reading_data %>%
    <td style="text-align:right;"> 252.6243 </td>
    <td style="text-align:right;"> 8 </td>
    <td style="text-align:right;"> 516.5196 </td>
+   <td style="text-align:left;"> m </td>
+   <td style="text-align:right;"> 35 </td>
   </tr>
 </tbody>
 </table></div>
@@ -1248,31 +1338,42 @@ reading_reduced <- reading_data %>%
 Visualizations in eye-tracking
 ========================================================
 
-![plot of chunk unnamed-chunk-15](EyeTrackingWorkshop-figure/unnamed-chunk-15-1.png)
+![plot of chunk unnamed-chunk-18](EyeTrackingWorkshop-figure/unnamed-chunk-18-1.png)
 ***
-![plot of chunk unnamed-chunk-16](EyeTrackingWorkshop-figure/unnamed-chunk-16-1.png)
+![plot of chunk unnamed-chunk-19](EyeTrackingWorkshop-figure/unnamed-chunk-19-1.png)
 
 
-Statistical analysis of eye-tracking data
+Visualizations in eye-tracking
 ========================================================
-Here we can talk about mixed effects models
+...without the outlier:  
+![plot of chunk unnamed-chunk-20](EyeTrackingWorkshop-figure/unnamed-chunk-20-1.png)
 
 
-
-Hands-on work
+Visualizations in eye-tracking
 ========================================================
+...by gender:  
+![plot of chunk unnamed-chunk-21](EyeTrackingWorkshop-figure/unnamed-chunk-21-1.png)
 
-Pick one of the two datasets we discussed, and try answering one of the following questions with it
 
-For Dataset A
-- x
-- y
-- z
+Interpretation/modeling
+========================================================
+type: prompt
+incremental: true
 
-For Dataset B
-- x
-- z
-- z
+- longer first fixations in incongruent conditions
+- longer regressions in incongruent conditions
+  - but: more variability
+- interpretation: incongruent combinations (*doctor* + *she*, *nurse* + *he*) are more difficult to process
+
+
+```r
+fixations_mod <- lmer(IA_FIRST_FIXATION_DURATION ~ condition * gender + 
+  (1 + condition * gender | RECORDING_SESSION_LABEL),
+   data = reading)
+regressions_mod <- lmer(IA_REGRESSION_PATH_DURATION ~ condition * gender + 
+  (1 + condition * gender | RECORDING_SESSION_LABEL),
+   data = reading)
+```
 
 
 Resources
@@ -1281,7 +1382,7 @@ Resources
 **Books**
 
 - Conklin, K., Pellicer-Sanchez, A., & Carroll, G. (2018). *Eye-tracking: A guide for applied linguistics research*. Cambridge, New York, NY: Cambridge University Press.
-
+- Klein, C., & Ettinger, U. (Eds.). (2019). *Eye Movement Research: An Introduction to Its Scientific Foundations and Applications*. Springer Nature.
 
 ***
 
