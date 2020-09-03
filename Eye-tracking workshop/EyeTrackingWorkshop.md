@@ -196,18 +196,16 @@ Task Examples
 <img src="files/FreeViewing.jpg" title="Free Viewing" alt="Free Viewing" width="75%" height="75%" />
 
 
-Task Examples
+Task Examples: Embedded Figures Task
 ========================================================
-**Embedded Figures Task**
 
-<img src="files/EmbeddedFIgures2.jpg" title="Embedded Figures" alt="Embedded Figures" width="75%" height="75%" />
+<img src="files/EmbeddedFIgures2.jpg" title="Embedded Figures" alt="Embedded Figures" width="30%" height="30%" />
 
 
-Task Examples
+Task Examples: Embedded Figures Task
 ========================================================
-**Embedded Figures Task**
 
-<img src="files/EmbeddedFigures1.jpg" title="Embedded Figures" alt="Embedded Figures" width="75%" height="75%" />
+<img src="files/EmbeddedFigures1.jpg" title="Embedded Figures" alt="Embedded Figures" width="30%" height="30%" />
 
 
 Let's look at some scan-paths
@@ -1046,10 +1044,204 @@ What does eye-tracking data look like?
 
 Here is another simulated dataset. Let's spend some time talking about how this one is different.
 
-
-```r
-#VisualSearch_Sim <- read_csv("data/VIsualSearch_Sim.csv")
-```
+<div style="border: 1px solid #ddd; padding: 0px; overflow-y: scroll; height:400px; overflow-x: scroll; width:100%; "><table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; margin-left: auto; margin-right: auto;'>
+ <thead>
+  <tr>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> X1 </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> AOI.Name </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Trial </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Stimulus </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Category.Group </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Index </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Event.Start.Trial.Time </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Event.End.Trial.Time </th>
+   <th style="text-align:right;position: sticky; top:0; background-color: #FFFFFF;"> Event.Duration </th>
+   <th style="text-align:left;position: sticky; top:0; background-color: #FFFFFF;"> Participant </th>
+  </tr>
+ </thead>
+<tbody>
+  <tr>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:left;"> Grid </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:left;"> Folie8.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2430.4 </td>
+   <td style="text-align:right;"> 2606.5 </td>
+   <td style="text-align:right;"> 167.0 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> Folie22.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:right;"> 4327.4 </td>
+   <td style="text-align:right;"> 4334.6 </td>
+   <td style="text-align:right;"> 8.4 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> Grid </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:left;"> Folie4.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 4876.7 </td>
+   <td style="text-align:right;"> 5081.8 </td>
+   <td style="text-align:right;"> 167.0 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 4 </td>
+   <td style="text-align:left;"> Grid </td>
+   <td style="text-align:right;"> 21 </td>
+   <td style="text-align:left;"> Folie10.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:right;"> 4679.4 </td>
+   <td style="text-align:right;"> 4974.6 </td>
+   <td style="text-align:right;"> 200.4 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> Folie3.jpg </td>
+   <td style="text-align:left;"> Information </td>
+   <td style="text-align:right;"> 1 </td>
+   <td style="text-align:right;"> 0.0 </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:right;"> NA </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> Grid </td>
+   <td style="text-align:right;"> 26 </td>
+   <td style="text-align:left;"> Folie5.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:right;"> 2808.6 </td>
+   <td style="text-align:right;"> 3023.5 </td>
+   <td style="text-align:right;"> 233.9 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:left;"> Folie9.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 6 </td>
+   <td style="text-align:right;"> 2473.7 </td>
+   <td style="text-align:right;"> 2522.7 </td>
+   <td style="text-align:right;"> 8.4 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 8 </td>
+   <td style="text-align:left;"> Grid </td>
+   <td style="text-align:right;"> 27 </td>
+   <td style="text-align:left;"> Folie18.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 8196.4 </td>
+   <td style="text-align:right;"> 8259.9 </td>
+   <td style="text-align:right;"> 75.1 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 9 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:left;"> Folie25.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 25 </td>
+   <td style="text-align:right;"> 7147.2 </td>
+   <td style="text-align:right;"> 7147.9 </td>
+   <td style="text-align:right;"> 8.3 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:left;"> Grid </td>
+   <td style="text-align:right;"> 20 </td>
+   <td style="text-align:left;"> Folie29.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 17 </td>
+   <td style="text-align:right;"> 4824.1 </td>
+   <td style="text-align:right;"> 4968.5 </td>
+   <td style="text-align:right;"> 183.7 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 11 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:left;"> Folie8.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 10 </td>
+   <td style="text-align:right;"> 4653.5 </td>
+   <td style="text-align:right;"> 4723.7 </td>
+   <td style="text-align:right;"> 8.4 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 12 </td>
+   <td style="text-align:left;"> Fixation </td>
+   <td style="text-align:right;"> 23 </td>
+   <td style="text-align:left;"> Folie14.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 3 </td>
+   <td style="text-align:right;"> 555.6 </td>
+   <td style="text-align:right;"> 797.6 </td>
+   <td style="text-align:right;"> 250.6 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 13 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 7 </td>
+   <td style="text-align:left;"> Folie26.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 19 </td>
+   <td style="text-align:right;"> 7304.0 </td>
+   <td style="text-align:right;"> 7309.2 </td>
+   <td style="text-align:right;"> 8.3 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:left;"> NA </td>
+   <td style="text-align:right;"> 2 </td>
+   <td style="text-align:left;"> Folie3.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 16 </td>
+   <td style="text-align:right;"> 5081.8 </td>
+   <td style="text-align:right;"> 5066.9 </td>
+   <td style="text-align:right;"> 8.4 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+  <tr>
+   <td style="text-align:right;"> 15 </td>
+   <td style="text-align:left;"> Target Word </td>
+   <td style="text-align:right;"> 14 </td>
+   <td style="text-align:left;"> Folie20.jpg </td>
+   <td style="text-align:left;"> Eye </td>
+   <td style="text-align:right;"> 5 </td>
+   <td style="text-align:right;"> 2433.2 </td>
+   <td style="text-align:right;"> 2737.3 </td>
+   <td style="text-align:right;"> 300.5 </td>
+   <td style="text-align:left;"> p1 </td>
+  </tr>
+</tbody>
+</table></div>
 
 
 Working with eye-tracking data
@@ -1338,21 +1530,54 @@ Working with eye-tracking data
 Visualizations in eye-tracking
 ========================================================
 
-![plot of chunk unnamed-chunk-18](EyeTrackingWorkshop-figure/unnamed-chunk-18-1.png)
+```r
+p_fix <- reading %>% 
+  ggplot() +
+  aes(condition, IA_FIRST_FIXATION_DURATION) +
+  geom_violin() +
+  ylab("First fixation duration on 'his'/'her'") +
+  theme_minimal()
+```
 ***
-![plot of chunk unnamed-chunk-19](EyeTrackingWorkshop-figure/unnamed-chunk-19-1.png)
+
+```r
+p_reg <- reading %>% 
+  ggplot() +
+  aes(condition, IA_REGRESSION_PATH_DURATION) +
+  geom_violin() +
+  ylab("Regression path duration from 'his'/'her'") +
+  theme_minimal()
+```
+
+
+Visualizations in eye-tracking
+========================================================
+![plot of chunk unnamed-chunk-20](EyeTrackingWorkshop-figure/unnamed-chunk-20-1.png)
+***
+![plot of chunk unnamed-chunk-21](EyeTrackingWorkshop-figure/unnamed-chunk-21-1.png)
 
 
 Visualizations in eye-tracking
 ========================================================
 ...without the outlier:  
-![plot of chunk unnamed-chunk-20](EyeTrackingWorkshop-figure/unnamed-chunk-20-1.png)
+![plot of chunk unnamed-chunk-22](EyeTrackingWorkshop-figure/unnamed-chunk-22-1.png)
 
 
 Visualizations in eye-tracking
 ========================================================
 ...by gender:  
-![plot of chunk unnamed-chunk-21](EyeTrackingWorkshop-figure/unnamed-chunk-21-1.png)
+
+```r
+p_fix_g <- reading %>% 
+  ggplot() +
+  aes(condition, IA_FIRST_FIXATION_DURATION) +
+  geom_violin() +
+  facet_wrap(~ gender) +
+  ylab("First fixation duration on 'his'/'her'") +
+  theme_minimal()
+```
+***
+![plot of chunk unnamed-chunk-24](EyeTrackingWorkshop-figure/unnamed-chunk-24-1.png)
 
 
 Interpretation/modeling
@@ -1374,6 +1599,66 @@ regressions_mod <- lmer(IA_REGRESSION_PATH_DURATION ~ condition * gender +
   (1 + condition * gender | RECORDING_SESSION_LABEL),
    data = reading)
 ```
+
+
+Working with eye-tracking data
+========================================================
+Find first fixation on Target word, after fixation onset
+
+```r
+AllFixTarget<-VisualSearch_Sim[VisualSearch_Sim$AOI.Name == "Target Word" & VisualSearch_Sim$Event.Start.Trial.Time >1700,]
+FirstFixTarget<-aggregate(Event.Start.Trial.Time~ Participant+Trial, AllFixTarget, min)
+```
+
+
+Working with eye-tracking data
+========================================================
+Find mean duration in Grid
+
+```r
+AllFixGrid<-VisualSearch_Sim[VisualSearch_Sim$AOI.Name == "Grid" & VisualSearch_Sim$Event.Start.Trial.Time >1700,]
+MeanTimeinGrid<-aggregate(Event.Start.Trial.Time~ Participant+Trial, AllFixGrid, mean)
+```
+
+
+Working with eye-tracking data
+========================================================
+Find difference between first fixation on target/grid and end of trial
+
+```r
+FirstFixTarget$StartTrial<-9000-FirstFixTarget$Event.Start.Trial.Time
+```
+
+
+Visualizations in eye-tracking
+========================================================
+
+```r
+theme_set(theme_classic(base_size = 18))
+
+a1<-ggplot(MeanTimeinGrid, aes(x=Event.Start.Trial.Time)) + ggtitle("Mean Time Searching") +
+  geom_density(size=1.25) + 
+  #scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
+  #scale_x_continuous(labels = scales::comma)+
+  #scale_y_continuous(labels = points)+
+  labs(y="Density", x="Mean Time")
+
+options(scipen=999)
+```
+
+
+Visualizations in eye-tracking
+========================================================
+![plot of chunk unnamed-chunk-30](EyeTrackingWorkshop-figure/unnamed-chunk-30-1.png)
+
+
+R packages
+========================================================
+- https://github.com/davebraze/FDBeye/wiki/Researcher-Contributed-Eye-Tracking-Tools
+- eyetrackingR
+- gazepath
+- popEye
+- gazeR
 
 
 Resources

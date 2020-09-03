@@ -4,7 +4,7 @@ summary(Divya_s_sim_data)
 
 # Find first fixation on Target word, after fixation onset
 AllFixTarget<-Divya_s_sim_data[Divya_s_sim_data$AOI.Name == "Target Word" & Divya_s_sim_data$Event.Start.Trial.Time >1700,]
-FirstFixTarget<-aggregate(Event.Start.Trial.Time~ Participant+Trial+, AllFixTarget, min)
+FirstFixTarget<-aggregate(Event.Start.Trial.Time ~ Participant+Trial+, AllFixTarget, min)
 
 # Find mean duration in Grid
 AllFixGrid<-Divya_s_sim_data[Divya_s_sim_data$AOI.Name == "Grid" & Divya_s_sim_data$Event.Start.Trial.Time >1700,]
