@@ -8,10 +8,8 @@ font-family: 'Lato'
 
 The basic idea: What does eye-tracking do?
 ========================================================
-```{r, echo=FALSE, include=FALSE, results='hide', message=FALSE, warning=FALSE}
-library(tidyverse); library(hablar); library(kableExtra); library(lme4)
-#setwd("E:/R-Ladies/R-Ladies-Freiburg-Back-Stage/Eye-tracking workshop")
-setwd("C:/Users/Lenovo/Documents/GitHub/R-Ladies-Freiburg-Back-Stage/Eye-tracking workshop")
+```{r, echo = FALSE}
+library(tidyverse); library(hablar); library(kableExtra); library(lme4); library(stats)
 ```
 
 Eye-tracking relies on the **eye-mind hypothesis/assumption**:  
@@ -218,20 +216,18 @@ knitr::include_graphics("files/FreeViewing.jpg")
 ```
 
 
-Task Examples
+Task Examples: Embedded Figures Task
 ========================================================
-**Embedded Figures Task**
 
-```{r, echo=FALSE, out.width="75%", out.height="75%",fig.cap="Embedded Figures"}
+```{r, echo=FALSE, out.width="30%", out.height="30%",fig.cap="Embedded Figures"}
 knitr::include_graphics("files/EmbeddedFIgures2.jpg")
 ```
 
 
-Task Examples
+Task Examples: Embedded Figures Task
 ========================================================
-**Embedded Figures Task**
 
-```{r, echo=FALSE, out.width="75%", out.height="75%",fig.cap="Embedded Figures"}
+```{r, echo=FALSE, out.width="30%", out.height="30%",fig.cap="Embedded Figures"}
 knitr::include_graphics("files/EmbeddedFigures1.jpg")
 ```
 
@@ -346,8 +342,12 @@ What does eye-tracking data look like?
 
 Here is another simulated dataset. Let's spend some time talking about how this one is different.
 
-```{r}
-#VisualSearch_Sim <- read_csv("data/VIsualSearch_Sim.csv")
+```{r echo = FALSE}
+VisualSearch_Sim <- read_csv("data/Divya's_sim_data.csv")
+
+kbl(head(VisualSearch_Sim, 15)) %>%
+  kable_paper() %>%
+  scroll_box(width = "100%", height = "400px")
 ```
 
 
@@ -442,9 +442,8 @@ kbl(head(reading, 15)) %>%
 
 Visualizations in eye-tracking
 ========================================================
-
-```{r, echo = FALSE}
-reading %>% 
+```{r}
+p_fix <- reading %>% 
   ggplot() +
   aes(condition, IA_FIRST_FIXATION_DURATION) +
   geom_violin() +
@@ -452,13 +451,24 @@ reading %>%
   theme_minimal()
 ```
 ***
-```{r, echo = FALSE}
-reading %>% 
+```{r}
+p_reg <- reading %>% 
   ggplot() +
   aes(condition, IA_REGRESSION_PATH_DURATION) +
   geom_violin() +
   ylab("Regression path duration from 'his'/'her'") +
   theme_minimal()
+```
+
+
+Visualizations in eye-tracking
+========================================================
+```{r, echo = FALSE}
+p_fix
+```
+***
+```{r, echo = FALSE}
+p_reg
 ```
 
 
@@ -479,14 +489,18 @@ reading %>%
 Visualizations in eye-tracking
 ========================================================
 ...by gender:  
-```{r, echo = FALSE}
-reading %>% 
+```{r}
+p_fix_g <- reading %>% 
   ggplot() +
   aes(condition, IA_FIRST_FIXATION_DURATION) +
   geom_violin() +
   facet_wrap(~ gender) +
   ylab("First fixation duration on 'his'/'her'") +
   theme_minimal()
+```
+***
+```{r, echo = FALSE}
+p_fix_g
 ```
 
 
@@ -508,6 +522,64 @@ regressions_mod <- lmer(IA_REGRESSION_PATH_DURATION ~ condition * gender +
   (1 + condition * gender | RECORDING_SESSION_LABEL),
    data = reading)
 ```
+
+
+Working with eye-tracking data
+========================================================
+Find first fixation on Target word, after fixation onset
+```{r}
+AllFixTarget<-VisualSearch_Sim[VisualSearch_Sim$AOI.Name == "Target Word" & VisualSearch_Sim$Event.Start.Trial.Time >1700,]
+FirstFixTarget<-aggregate(Event.Start.Trial.Time~ Participant+Trial, AllFixTarget, min)
+```
+
+
+Working with eye-tracking data
+========================================================
+Find mean duration in Grid
+```{r}
+AllFixGrid<-VisualSearch_Sim[VisualSearch_Sim$AOI.Name == "Grid" & VisualSearch_Sim$Event.Start.Trial.Time >1700,]
+MeanTimeinGrid<-aggregate(Event.Start.Trial.Time~ Participant+Trial, AllFixGrid, mean)
+```
+
+
+Working with eye-tracking data
+========================================================
+Find difference between first fixation on target/grid and end of trial
+```{r}
+FirstFixTarget$StartTrial<-9000-FirstFixTarget$Event.Start.Trial.Time
+```
+
+
+Visualizations in eye-tracking
+========================================================
+```{r}
+theme_set(theme_classic(base_size = 18))
+
+a1<-ggplot(MeanTimeinGrid, aes(x=Event.Start.Trial.Time)) + ggtitle("Mean Time Searching") +
+  geom_density(size=1.25) + 
+  #scale_y_continuous(labels = function(x) format(x, scientific = FALSE))
+  #scale_x_continuous(labels = scales::comma)+
+  #scale_y_continuous(labels = points)+
+  labs(y="Density", x="Mean Time")
+
+options(scipen=999)
+```
+
+
+Visualizations in eye-tracking
+========================================================
+```{r, echo = FALSE}
+a1
+```
+
+
+R packages
+========================================================
+- https://github.com/davebraze/FDBeye/wiki/Researcher-Contributed-Eye-Tracking-Tools
+- eyetrackingR
+- gazepath
+- popEye
+- gazeR
 
 
 Resources
